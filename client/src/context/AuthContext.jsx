@@ -3,6 +3,8 @@ import { api } from '../api.js';
 
 const AuthContext = createContext(null);
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,8 +25,21 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function login(email, password) {
-    await api.post('/auth/login', { email, password });
-    await refresh();
+    // Retry only on network errors (backend cold-start wake-up). A real HTTP
+    // error like 401 (wrong password) has err.status and is thrown immediately.
+    let lastErr;
+    for (let attempt = 0; attempt < 4; attempt++) {
+      try {
+        await api.post('/auth/login', { email, password });
+        await refresh();
+        return;
+      } catch (err) {
+        if (err.status) throw err; // HTTP error (e.g. 401) — don't retry
+        lastErr = err; // network error ("Failed to fetch") — backend likely waking
+        await sleep(3000);
+      }
+    }
+    throw lastErr;
   }
 
   async function register(payload) {
