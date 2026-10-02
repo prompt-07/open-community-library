@@ -3,15 +3,45 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { api } from '../api.js';
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 export default function Home() {
   const { t } = useTranslation();
   const [bookOfWeek, setBookOfWeek] = useState(null);
   const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Book of the Week may 404 if none is flagged — degrade gracefully.
-    api.get('/books/book-of-week').then(setBookOfWeek).catch(() => setBookOfWeek(null));
-    api.get('/stats/public').then(setStats).catch(() => setStats(null));
+    let cancelled = false;
+
+    // Retry a few times to ride out the backend's cold start (free tier can take
+    // ~50s to wake). A 404 on book-of-week is a real "none set", not a failure.
+    async function fetchWithRetry(path, { tries = 4, allow404 = false } = {}) {
+      for (let i = 0; i < tries; i++) {
+        try {
+          return await api.get(path);
+        } catch (err) {
+          if (allow404 && err.status === 404) return null;
+          if (i === tries - 1) throw err;
+          await sleep(3000);
+        }
+      }
+    }
+
+    (async () => {
+      const [bow, s] = await Promise.all([
+        fetchWithRetry('/books/book-of-week', { allow404: true }).catch(() => null),
+        fetchWithRetry('/stats/public').catch(() => null),
+      ]);
+      if (cancelled) return;
+      setBookOfWeek(bow);
+      setStats(s);
+      setLoading(false);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -36,7 +66,9 @@ export default function Home() {
       {/* Book of the Week */}
       <section>
         <h2>{t('home.bookOfWeek')}</h2>
-        {bookOfWeek ? (
+        {loading ? (
+          <p style={{ opacity: 0.7 }}>{t('common.loading')}</p>
+        ) : bookOfWeek ? (
           <article
             style={{
               display: 'flex',
@@ -86,9 +118,9 @@ export default function Home() {
             gap: '1rem',
           }}
         >
-          <StatCard label={t('home.impact.totalBooks')} value={stats?.totalBooks} />
-          <StatCard label={t('home.impact.activeReaders')} value={stats?.activeReaders} />
-          <StatCard label={t('home.impact.booksIssued')} value={stats?.booksIssuedToDate} />
+          <StatCard label={t('home.impact.totalBooks')} value={stats?.totalBooks} loading={loading} />
+          <StatCard label={t('home.impact.activeReaders')} value={stats?.activeReaders} loading={loading} />
+          <StatCard label={t('home.impact.booksIssued')} value={stats?.booksIssuedToDate} loading={loading} />
         </div>
       </section>
     </div>
@@ -144,7 +176,7 @@ function TagChip({ label }) {
   );
 }
 
-function StatCard({ label, value }) {
+function StatCard({ label, value, loading }) {
   return (
     <div
       style={{
@@ -156,7 +188,7 @@ function StatCard({ label, value }) {
       }}
     >
       <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', fontWeight: 700, color: 'var(--color-accent)' }}>
-        {value ?? '—'}
+        {loading ? '…' : (value ?? '—')}
       </div>
       <div style={{ fontWeight: 600 }}>{label}</div>
     </div>
