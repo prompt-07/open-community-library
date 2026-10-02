@@ -1,0 +1,44 @@
+{
+  "siteName": "मुक्त पुस्तकालय",
+  "nav": {
+    "home": "मुखपृष्ठ",
+    "browse": "पुस्तकें देखें",
+    "cart": "कार्ट",
+    "myReservations": "मेरे आरक्षण",
+    "about": "पुस्तकालय के बारे में",
+    "admin": "एडमिन डैशबोर्ड",
+    "login": "लॉगिन",
+    "register": "पंजीकरण",
+    "logout": "लॉगआउट",
+    "profile": "मेरी प्रोफ़ाइल"
+  },
+  "home": {
+    "heroTitle": "मुक्त पुस्तकालय में आपका स्वागत है",
+    "heroSubtitle": "पढ़ें. लौटाएँ. दोहराएँ.",
+    "browseCta": "पुस्तकें देखें",
+    "bookOfWeek": "सप्ताह की पुस्तक",
+    "impact": {
+      "totalBooks": "कुल पुस्तकें",
+      "activeReaders": "सक्रिय पाठक",
+      "booksIssued": "अब तक जारी पुस्तकें"
+    }
+  },
+  "browse": {
+    "searchPlaceholder": "शीर्षक, लेखक या कीवर्ड से खोजें",
+    "language": "भाषा",
+    "genre": "श्रेणी",
+    "availability": "उपलब्धता",
+    "showAll": "सभी दिखाएँ",
+    "availableOnly": "केवल उपलब्ध",
+    "seeDetails": "विवरण देखें",
+    "noBooks": "कोई पुस्तक नहीं मिली."
+  },
+  "status": {
+    "available": "उपलब्ध",
+    "lentOut": "उधार दिया गया"
+  },
+  "common": {
+    "loading": "लोड हो रहा है…",
+    "addToCart": "अगले सत्र के लिए यह पुस्तक मँगवाएँ"
+  }
+}

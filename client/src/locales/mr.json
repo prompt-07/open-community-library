@@ -1,0 +1,44 @@
+{
+  "siteName": "मुक्त ग्रंथालय",
+  "nav": {
+    "home": "मुख्यपृष्ठ",
+    "browse": "पुस्तके पहा",
+    "cart": "कार्ट",
+    "myReservations": "माझी आरक्षणे",
+    "about": "ग्रंथालयाबद्दल",
+    "admin": "प्रशासक डॅशबोर्ड",
+    "login": "लॉगिन",
+    "register": "नोंदणी",
+    "logout": "लॉगआउट",
+    "profile": "माझे प्रोफाइल"
+  },
+  "home": {
+    "heroTitle": "मुक्त ग्रंथालयात आपले स्वागत आहे",
+    "heroSubtitle": "वाचा. परत करा. पुन्हा वाचा.",
+    "browseCta": "पुस्तके पहा",
+    "bookOfWeek": "आठवड्याचे पुस्तक",
+    "impact": {
+      "totalBooks": "एकूण पुस्तके",
+      "activeReaders": "सक्रिय वाचक",
+      "booksIssued": "आजपर्यंत दिलेली पुस्तके"
+    }
+  },
+  "browse": {
+    "searchPlaceholder": "शीर्षक, लेखक किंवा शब्दाने शोधा",
+    "language": "भाषा",
+    "genre": "प्रकार",
+    "availability": "उपलब्धता",
+    "showAll": "सर्व दाखवा",
+    "availableOnly": "फक्त उपलब्ध",
+    "seeDetails": "तपशील पहा",
+    "noBooks": "कोणतीही पुस्तके सापडली नाहीत."
+  },
+  "status": {
+    "available": "उपलब्ध",
+    "lentOut": "उसने दिलेले"
+  },
+  "common": {
+    "loading": "लोड होत आहे…",
+    "addToCart": "पुढील सत्रासाठी हे पुस्तक मागवा"
+  }
+}

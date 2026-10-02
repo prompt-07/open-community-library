@@ -1,0 +1,44 @@
+{
+  "siteName": "Open Library",
+  "nav": {
+    "home": "Home",
+    "browse": "Browse Books",
+    "cart": "Cart",
+    "myReservations": "My Reservations",
+    "about": "About Library",
+    "admin": "Admin Dashboard",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "My Profile"
+  },
+  "home": {
+    "heroTitle": "Welcome to the Open Library",
+    "heroSubtitle": "Read. Return. Repeat.",
+    "browseCta": "Browse Books",
+    "bookOfWeek": "Book of the Week",
+    "impact": {
+      "totalBooks": "Total Books",
+      "activeReaders": "Active Readers",
+      "booksIssued": "Books Issued To Date"
+    }
+  },
+  "browse": {
+    "searchPlaceholder": "Search by title, author, or keyword",
+    "language": "Language",
+    "genre": "Genre",
+    "availability": "Availability",
+    "showAll": "Show All",
+    "availableOnly": "Available Only",
+    "seeDetails": "See Details",
+    "noBooks": "No books found."
+  },
+  "status": {
+    "available": "Available",
+    "lentOut": "Lent Out"
+  },
+  "common": {
+    "loading": "Loading…",
+    "addToCart": "Request This Book for Next Session"
+  }
+}
