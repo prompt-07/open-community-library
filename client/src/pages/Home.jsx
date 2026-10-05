@@ -56,6 +56,11 @@ export default function Home() {
           textAlign: 'center',
         }}
       >
+        <img
+          src="/logo-main.png"
+          alt="मुक्त वाचनालय — The Open Library"
+          style={{ width: 'min(240px, 60vw)', height: 'auto', margin: '0 auto 0.5rem' }}
+        />
         <h1>{t('home.heroTitle')}</h1>
         <p style={{ fontSize: '1.1rem', marginTop: '0.5rem' }}>{t('home.heroSubtitle')}</p>
         <Link to="/browse" className="btn btn-primary" style={{ marginTop: '1.25rem' }}>

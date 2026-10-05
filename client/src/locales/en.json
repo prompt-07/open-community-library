@@ -1,5 +1,5 @@
 {
-  "siteName": "Open Library",
+  "siteName": "Mukt Vachnalaya",
   "nav": {
     "home": "Home",
     "browse": "Browse Books",
@@ -13,8 +13,8 @@
     "profile": "My Profile"
   },
   "home": {
-    "heroTitle": "Welcome to the Open Library",
-    "heroSubtitle": "Read. Return. Repeat.",
+    "heroTitle": "Welcome to Mukt Vachnalaya — The Open Library",
+    "heroSubtitle": "ज्ञान दिल्याने ज्ञान वाढते — Knowledge grows when it is shared.",
     "browseCta": "Browse Books",
     "bookOfWeek": "Book of the Week",
     "impact": {

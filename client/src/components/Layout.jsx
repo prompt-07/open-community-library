@@ -58,7 +58,13 @@ export default function Layout() {
             flexWrap: 'wrap',
           }}
         >
-          <NavLink to="/" style={{ textDecoration: 'none' }}>
+          <NavLink to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <img
+              src="/logo-badge.png"
+              alt=""
+              aria-hidden="true"
+              style={{ width: 40, height: 40, borderRadius: '50%', flexShrink: 0 }}
+            />
             <span
               style={{
                 fontFamily: 'var(--font-serif)',
@@ -67,7 +73,7 @@ export default function Layout() {
                 color: 'var(--color-accent)',
               }}
             >
-              📚 {t('siteName')}
+              {t('siteName')}
             </span>
           </NavLink>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginLeft: 'auto', alignItems: 'center' }}>
