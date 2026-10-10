@@ -1,6 +1,13 @@
 // Thin fetch wrapper for the Open Library API. Always sends cookies so the
 // httpOnly JWT is included on authenticated requests.
-const BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
+//
+// In production the API is served same-origin via a Vercel rewrite proxy
+// (/api/* -> Render). This keeps the auth cookie first-party, so it works even
+// in browsers that block third-party cookies (Safari, Brave, hardened Chrome).
+// Local dev talks to the backend directly on :5000.
+const BASE = import.meta.env.PROD
+  ? '/api'
+  : import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
 
 async function request(path, { method = 'GET', body, headers } = {}) {
   const res = await fetch(`${BASE}${path}`, {
