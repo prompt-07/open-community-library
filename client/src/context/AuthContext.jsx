@@ -24,11 +24,13 @@ export function AuthProvider({ children }) {
     refresh();
   }, []);
 
-  async function login(email, password) {
+  async function login(email, password, onRetry) {
     // Retry only on network errors (backend cold-start wake-up). A real HTTP
     // error like 401 (wrong password) has err.status and is thrown immediately.
+    // ~10 attempts x 4s ≈ 40s of patience — enough to outlast a Render free-tier
+    // cold start (~20-50s). onRetry lets the UI show a "waking up" message.
     let lastErr;
-    for (let attempt = 0; attempt < 4; attempt++) {
+    for (let attempt = 0; attempt < 10; attempt++) {
       try {
         await api.post('/auth/login', { email, password });
         await refresh();
@@ -36,7 +38,8 @@ export function AuthProvider({ children }) {
       } catch (err) {
         if (err.status) throw err; // HTTP error (e.g. 401) — don't retry
         lastErr = err; // network error ("Failed to fetch") — backend likely waking
-        await sleep(3000);
+        onRetry?.(attempt + 1);
+        await sleep(4000);
       }
     }
     throw lastErr;
